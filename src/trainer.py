@@ -93,7 +93,7 @@ valset = dataset.Skin7(root="/home/ubuntu22/dataset/", iter_fold=iter_fold, trai
                        transform=val_transform)
 
 net = model.Network(backbone=backbone, num_classes=num_classes,
-                    input_channel=input_channel, pretrained=initialization)
+                    input_channel=input_channel, pretrained=False)
 
 _print("=> Using device ids: {}".format(cuda_ids))
 device_ids = list(range(len(cuda_ids.split(","))))
