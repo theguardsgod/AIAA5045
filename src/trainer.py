@@ -87,9 +87,9 @@ val_transform = transforms.Compose([
     ])
 
 input_channel = 3
-trainset = dataset.Skin7(root="/home\ubuntu22/dataset/", iter_fold=iter_fold, train=True,
+trainset = dataset.Skin7(root="/home/ubuntu22/dataset/", iter_fold=iter_fold, train=True,
                          transform=train_transform)
-valset = dataset.Skin7(root="/home\ubuntu22/dataset/", iter_fold=iter_fold, train=False,
+valset = dataset.Skin7(root="/home/ubuntu22/dataset/", iter_fold=iter_fold, train=False,
                        transform=val_transform)
 
 net = model.Network(backbone=backbone, num_classes=num_classes,
