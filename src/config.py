@@ -161,8 +161,8 @@ class Config:
             self.config["log_dir"] = " "
             self.config["model_dir"] = " "
         elif self.config["server"] == "lcy":
-            self.config["log_dir"] = " "
-            self.config["model_dir"] = " "
+            self.config["log_dir"] = "./saved/logdirs"
+            self.config["model_dir"] = "./saved/models"
         else:
             print("Illegal server configuration")
             sys.exit(-1)
