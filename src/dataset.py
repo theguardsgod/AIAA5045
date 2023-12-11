@@ -15,12 +15,12 @@ from torchvision import transforms
 
 class Skin7(Dataset):
     """SKin Lesion"""
-    def __init__(self, root="./data", iter_fold=1, train=True, transform=None):
-        self.root = os.path.join(root, "ISIC2018")
+    def __init__(self, root="./data", train='train', transform=None):
+        self.root = root
         self.transform = transform
         self.train = train
 
-        self.data, self.targets = self.get_data(iter_fold, self.root)
+        self.data, self.targets = self.get_data(self.root)
         self.classes_name = ['MEL', 'NV', 'BCC', 'AKIEC', 'BKL', 'DF', 'VASC']
         self.classes = list(range(len(self.classes_name)))
         self.target_img_dict = {}
@@ -48,22 +48,23 @@ class Skin7(Dataset):
     def __len__(self):
         return len(self.data)
 
-    def get_data(self, iterNo, data_dir):
+    def get_data(self, data_dir):
 
-        if self.train:
-            csv = 'split_data/split_data_{}_fold_train.csv'.format(iterNo)
-        else:
-            csv = 'split_data/split_data_{}_fold_test.csv'.format(iterNo)
+        if self.train == 'train':
+            csv = './data/converted_label/train.csv'
+        elif self.train == 'val':
+            csv = './data/converted_label/val.csv'
+        elif self.train == 'test':
+            csv = './data/converted_label/test.csv'
 
-        fn = os.path.join(data_dir, csv)
+        fn = csv
         csvfile = pd.read_csv(fn)
         raw_data = csvfile.values
 
         data = []
         targets = []
         for path, label in raw_data:
-            data.append(os.path.join(self.root,
-                                     "ISIC2018_Task3_Training_Input", path))
+            data.append(os.path.join(self.root, path))
             targets.append(label)
 
         return data, targets

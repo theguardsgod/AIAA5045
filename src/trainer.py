@@ -20,7 +20,7 @@ import config
 import dataset
 import model
 from loss import class_balanced_loss
-
+from rich import print
 
 configs = config.Config()
 configs_dict = configs.get_config()
@@ -87,9 +87,11 @@ val_transform = transforms.Compose([
     ])
 
 input_channel = 3
-trainset = dataset.Skin7(root="/home/ubuntu22/dataset/", iter_fold=iter_fold, train=True,
+trainset = dataset.Skin7(root="/data/zhuzhengjie/DATA/ISIC2018/ISIC2018_Task3_Training_Input", train='train',
                          transform=train_transform)
-valset = dataset.Skin7(root="/home/ubuntu22/dataset/", iter_fold=iter_fold, train=False,
+valset = dataset.Skin7(root="/data/zhuzhengjie/DATA/ISIC2018/ISIC2018_Task3_Validation_Input", train='val',
+                       transform=val_transform)
+testset = dataset.Skin7(root="/data/zhuzhengjie/DATA/ISIC2018/ISIC2018_Task3_Test_Input", train='test',
                        transform=val_transform)
 
 net = model.Network(backbone=backbone, num_classes=num_classes,
@@ -118,7 +120,10 @@ valloader = torch.utils.data.DataLoader(valset, batch_size=batch_size,
                                         shuffle=False, pin_memory=True,
                                         num_workers=num_workers,
                                         sampler=val_sampler)
-
+testloader = torch.utils.data.DataLoader(testset, batch_size=batch_size,
+                                        shuffle=False, pin_memory=True,
+                                        num_workers=num_workers,
+                                        sampler=val_sampler)
 
 # Loss
 if loss_fn == "WCE":
@@ -230,9 +235,33 @@ for epoch in range(start_epoch+1, n_epochs+1):
             sota["mcr"] = mcr
             sota["epoch"] = epoch
             model_path = os.path.join(model_dir, str(exp), str(epoch))
+            best_model_path = os.path.join(model_dir, str(exp), "best")
             _print("=> Save model in {}".format(model_path))
+            _print("=> Also save model in {}".format(best_model_path))
             net_state_dict = net.state_dict()
             torch.save(net_state_dict, model_path)
+            torch.save(net_state_dict, best_model_path)
+    if epoch == n_epochs:
+        _print("=> Loading best model to test")
+        best_ckp = torch.load(best_model_path)
+        net.load_state_dict(best_ckp)
+        net.eval()
+        y_true = []
+        y_pred = []
+        for _, (data, target) in enumerate(testloader):
+            data = data.to(device)
+            predict = torch.argmax(net(data), dim=1).cpu().data.numpy()
+            y_pred.extend(predict)
+            target = target.cpu().data.numpy()
+            y_true.extend(target)
+
+        acc = accuracy_score(y_true, y_pred)
+        mcr = mean_class_recall(y_true, y_pred)
+        _print("=> Epoch:{} - test acc: {:.4f}".format(epoch, acc))
+        _print("=> Epoch:{} - test mcr: {:.4f}".format(epoch, mcr))
+        writer.add_scalar("Acc/test/", acc, epoch)
+        writer.add_scalar("Mcr/test/", mcr, epoch)
+        
 
 _print("=> Finish Training")
 _print("=> Best epoch {} with {} on Val: {:.4f}".format(sota["epoch"],

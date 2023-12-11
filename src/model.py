@@ -9,7 +9,7 @@ import torch.nn as nn
 import torchvision
 from torchsummary import summary
 
-import pretrainedmodels
+# import pretrainedmodels
 
 
 # from utils.initialization import _kaiming_normal, _xavier_normal, \

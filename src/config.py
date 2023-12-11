@@ -98,8 +98,8 @@ class Config:
         """Add customized setting
         """
         self.parser.add_argument("--server", default="lab_center", type=str,
-                                 choices=["local", "ls15", "ls16",
-                                          "lab_center"],
+                                 choices=["local", "zzj", "dby",
+                                          "lcy"],
                                  help="server to run the code")
         self.parser.add_argument("--num_classes", default=7, type=int,
                                  help="number of classes to classify.")
@@ -154,21 +154,15 @@ class Config:
     def _path_suitable_for_server(self):
         """Path suitable for server
         """
-        if self.config["server"] == "desktop":
-            self.config["log_dir"] = "/home/lincolnzjx/Desktop/ISIC_2018_Classification/saved/logdirs"
-            self.config["model_dir"] = "/home/lincolnzjx/Desktop/ISIC_2018_Classification/saved/models"
-        if self.config["server"] == "local":
-            self.config["log_dir"] = "/media/lincolnzjx/HardDisk/myGithub/ISIC_2018_Classification/saved/logdirs"
-            self.config["model_dir"] = "/media/lincolnzjx/HardDisk/myGithub/ISIC_2018_Classification/saved/models"
-        elif self.config["server"] == "ls15":
-            self.config["log_dir"] = "/data15/jiaxin/ISIC_2018_Classification/saved/logdirs"
-            self.config["model_dir"] = "/data15/jiaxin/ISIC_2018_Classification/saved/models"
-        elif self.config["server"] == "ls16":
-            self.config["log_dir"] = "/data16/jiaxin/ISIC_2018_Classification/saved/logdirs"
-            self.config["model_dir"] = "/data16/jiaxin/ISIC_2018_Classification/saved/models"
-        elif self.config["server"] == "lab_center":
-            self.config["log_dir"] = "./saved/logdirs"
-            self.config["model_dir"] = "./saved/models"
+        if self.config["server"] == "zzj":
+            self.config["log_dir"] = "/home/zhuzhengjie/root/RESULT/AIAA5045/saved/logdirs"
+            self.config["model_dir"] = "/home/zhuzhengjie/root/RESULT/AIAA5045/saved/models"
+        elif self.config["server"] == "dby":
+            self.config["log_dir"] = " "
+            self.config["model_dir"] = " "
+        elif self.config["server"] == "lcy":
+            self.config["log_dir"] = " "
+            self.config["model_dir"] = " "
         else:
             print("Illegal server configuration")
             sys.exit(-1)

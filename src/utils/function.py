@@ -36,7 +36,7 @@ def init_environment(seed=0, cuda_id="0"):
     os.environ['CUDA_VISIBLE_DEVICES'] = cuda_id
 
     if seed != -1:
-        print("> Use seed -{}".format(seed))
+        print("> Use seed :{}".format(seed))
         torch.backends.cudnn.deterministic = True
         torch.backends.cudnn.benchmark = False
         torch.manual_seed(seed)
