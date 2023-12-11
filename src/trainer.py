@@ -87,11 +87,11 @@ val_transform = transforms.Compose([
     ])
 
 input_channel = 3
-trainset = dataset.Skin7(root="/data/zhuzhengjie/DATA/ISIC2018/ISIC2018_Task3_Training_Input", train='train',
+trainset = dataset.Skin7(root="/home/ubuntu22/dataset/ISIC2018/ISIC2018_Task3_Training_Input", train='train',
                          transform=train_transform)
-valset = dataset.Skin7(root="/data/zhuzhengjie/DATA/ISIC2018/ISIC2018_Task3_Validation_Input", train='val',
+valset = dataset.Skin7(root="/home/ubuntu22/dataset/ISIC2018/ISIC2018_Task3_Validation_Input", train='val',
                        transform=val_transform)
-testset = dataset.Skin7(root="/data/zhuzhengjie/DATA/ISIC2018/ISIC2018_Task3_Test_Input", train='test',
+testset = dataset.Skin7(root="/home/ubuntu22/dataset/ISIC2018/ISIC2018_Task3_Test_Input", train='test',
                        transform=val_transform)
 
 net = model.Network(backbone=backbone, num_classes=num_classes,
