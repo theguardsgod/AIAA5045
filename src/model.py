@@ -30,6 +30,10 @@ class Network(nn.Module):
             model = ResNet18(num_classes=num_classes,
                              input_channel=input_channel,
                              pretrained=pretrained)
+        elif backbone == "dense121":
+            model = DenseNet121(num_classes=num_classes,
+                                input_channel=input_channel,
+                                pretrained=pretrained)
         elif backbone == "PNASNet5Large":
             model = PNASNet5Large(num_classes=num_classes,
                                   input_channel=input_channel,
@@ -88,7 +92,16 @@ class ResNet18(nn.Module):
         x = self.classifier(x)
         return x
 
+class DenseNet121(nn.Module):
+    def __init__(self, num_classes, input_channel, pretrained):
+        super(DenseNet121, self).__init__()
+        self.model = torchvision.models.densenet121(pretrained=pretrained)
+        self.model.classifier = nn.Linear(1024, num_classes)
 
+    def forward(self, x):
+        x =  self.model(x)
+        return x
+        
 class PNASNet5Large(nn.Module):
     """PNASNet5Large.
     """
@@ -158,6 +171,7 @@ if __name__ == "__main__":
     # net = Network(backbone="resnet50", num_classes=200)
     input_size = (3, 331, 331)
     # net = Network(backbone="PNASNet5Large", num_classes=200)
-    net = Network(backbone="NASNetALarge", num_classes=200)
+    net = Network(backbone="dense121", num_classes=7)
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+    
     net.print_model(input_size, device)
