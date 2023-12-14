@@ -95,8 +95,8 @@ class ResNet18(nn.Module):
 class DenseNet121(nn.Module):
     def __init__(self, num_classes, input_channel, pretrained):
         super(DenseNet121, self).__init__()
-        self.model = torchvision.models.densenet121(pretrained=pretrained)
-        self.model.classifier = nn.Linear(1024, num_classes)
+        self.model = torchvision.models.densenet121(pretrained=pretrained, drop_rate=0.2, num_classes=num_classes)
+        #self.model.classifier = nn.Linear(1024, num_classes)
 
     def forward(self, x):
         x =  self.model(x)

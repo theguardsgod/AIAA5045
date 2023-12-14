@@ -99,8 +99,9 @@ valset = dataset.Skin7(root="/home/ubuntu22/dataset/ISIC2018/ISIC2018_Task3_Vali
 testset = dataset.Skin7(root="/home/ubuntu22/dataset/ISIC2018/ISIC2018_Task3_Test_Input", train='test',
                        transform=val_transform)
 
+# modify here to change pretrain
 net = model.Network(backbone=backbone, num_classes=num_classes,
-                    input_channel=input_channel, pretrained=False)
+                    input_channel=input_channel, pretrained=True)
 
 _print("=> Using device ids: {}".format(cuda_ids))
 device_ids = list(range(len(cuda_ids.split(","))))
