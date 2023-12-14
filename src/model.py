@@ -34,6 +34,10 @@ class Network(nn.Module):
             model = DenseNet121(num_classes=num_classes,
                                 input_channel=input_channel,
                                 pretrained=pretrained)
+        elif backbone == "dense201":
+            model = DenseNet201(num_classes=num_classes,
+                                input_channel=input_channel,
+                                pretrained=pretrained)
         elif backbone == "PNASNet5Large":
             model = PNASNet5Large(num_classes=num_classes,
                                   input_channel=input_channel,
@@ -96,6 +100,16 @@ class DenseNet121(nn.Module):
     def __init__(self, num_classes, input_channel, pretrained):
         super(DenseNet121, self).__init__()
         self.model = torchvision.models.densenet121(pretrained=pretrained, drop_rate=0.2)
+        self.model.classifier = nn.Linear(1024, num_classes)
+
+    def forward(self, x):
+        x =  self.model(x)
+        return x
+
+class DenseNet201(nn.Module):
+    def __init__(self, num_classes, input_channel, pretrained):
+        super(DenseNet201， self).__init__()
+        self.model = torchvision.models.densenet201(pretrained=pretrained, drop_rate=0.2)
         self.model.classifier = nn.Linear(1024, num_classes)
 
     def forward(self, x):
