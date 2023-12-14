@@ -57,7 +57,7 @@ if backbone in ["resnet50", "resnet18"]:
     input_size = 224
     mean = [0.485, 0.456, 0.406]
     std = [0.229, 0.224, 0.225]
-elif backbone in ["dense121"]:
+elif backbone in ["dense121","dense201"]:
     re_size = 256
     input_size = 224
     mean=[0.485, 0.456, 0.406] 

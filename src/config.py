@@ -81,7 +81,7 @@ class Config:
                                  help="channel of input image")
         # Backbone
         self.parser.add_argument("--backbone", default="resnet50", type=str,
-                                 choices=["resnet50", "PNASNet5Large", "dense121",
+                                 choices=["resnet50", "PNASNet5Large", "dense121","dense201",
                                           "NASNetALarge", "resnet18"],
                                  help="backbone for model")
         # Initialization
