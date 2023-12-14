@@ -108,7 +108,7 @@ class DenseNet121(nn.Module):
 
 class DenseNet201(nn.Module):
     def __init__(self, num_classes, input_channel, pretrained):
-        super(DenseNet201， self).__init__()
+        super(DenseNet201, self).__init__()
         self.model = torchvision.models.densenet201(pretrained=pretrained, drop_rate=0.2)
         self.model.classifier = nn.Linear(1024, num_classes)
 
