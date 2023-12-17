@@ -112,6 +112,8 @@ class Config:
         self.parser.add_argument("--loss_fn", default="WCE", type=str,
                                  choices=["CE", "WCE", "BCE"],
                                  help="Loss function for code.")
+        self.parser.add_argument("--num_labeled", default=10007, type=int,
+                                 help="number of classes to classify.")
 
     def _load_common_setting(self):
         """Load default setting from Parser
