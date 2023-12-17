@@ -18,7 +18,7 @@ std=[0.229, 0.224, 0.225]
 
 
 
-def get_fixMatch(configs_dict, root):
+def get_fixMatch(configs_dict):
     transform_labeled = transforms.Compose([
         transforms.Resize(re_size),
         transforms.RandomHorizontalFlip(),
@@ -54,10 +54,8 @@ def get_fixMatch(configs_dict, root):
         root, train_unlabeled_idxs, train='train',
         transform=TransformFixMatch(mean=mean, std=std))
 
-    test_dataset = dataset.Skin7(
-        root, train='test', transform=transform_val)
 
-    return train_labeled_dataset, train_unlabeled_dataset, test_dataset
+    return train_labeled_dataset, train_unlabeled_dataset, valset, testset
 
 
 
