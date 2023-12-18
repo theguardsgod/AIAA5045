@@ -6,7 +6,7 @@ from PIL import Image
 from torchvision import datasets
 from torchvision import transforms
 import dataset
-from .randaugment import RandAugmentMC
+from randaugment import RandAugmentMC
 
 logger = logging.getLogger(__name__)
 

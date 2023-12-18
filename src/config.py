@@ -156,6 +156,9 @@ class Config:
         self.config["nproc_per_node"] = self.args.nproc_per_node
         self.config["local_rank"] = self.args.local_rank
         self.config["loss_fn"] = self.args.loss_fn
+        self.config["num_labeled"] = self.args.num_labeled
+        self.config["mu"] = self.args.mu
+        self.config["threshold"] = self.args.threshold
 
     def _path_suitable_for_server(self):
         """Path suitable for server
