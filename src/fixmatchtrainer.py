@@ -236,7 +236,7 @@ for epoch in range(start_epoch+1, n_epochs+1):
         max_probs, targets_u = torch.max(pseudo_label, dim=-1)
         mask = max_probs.ge(threshold).float()
 
-        Lu = (F.cross_entropy(logits_u_s, targets_u, 
+        Lu = (F.cross_entropy(logits_u_s, targets_u,
                               reduction='none') * mask).mean()
 
         loss = Lx + Lu
