@@ -42,7 +42,7 @@ def get_fixMatch(configs_dict):
                            transform=transform_val)
     testset = dataset.Skin7(root="/home/ubuntu22/dataset/ISIC2018/ISIC2018_Task3_Test_Input", train='test',
                             transform=transform_val)
-    root = "/home/ubuntu22/dataset/ISIC2018/ISIC2018_Task3_Validation_Input"
+    root = "/home/ubuntu22/dataset/ISIC2018/ISIC2018_Task3_Training_Input"
     train_labeled_idxs, train_unlabeled_idxs = x_u_split(
         configs_dict, trainset.targets)
 
