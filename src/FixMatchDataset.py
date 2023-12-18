@@ -45,7 +45,7 @@ def get_fixMatch(configs_dict):
     root = "/home/ubuntu22/dataset/ISIC2018/ISIC2018_Task3_Validation_Input"
     train_labeled_idxs, train_unlabeled_idxs = x_u_split(
         configs_dict, trainset.targets)
-    print(train_labeled_idxs)
+
     train_labeled_dataset = Skin7SSL(
         root, train_labeled_idxs, train='train',
         transform=transform_labeled)
@@ -104,7 +104,7 @@ class Skin7SSL(dataset.Skin7):
                          transform=transform,
                          )
         if indexs is not None:
-            self.data = self.data[indexs]
+            self.data = np.array(self.data)[indexs]
             self.targets = np.array(self.targets)[indexs]
 
     def __getitem__(self, index):
