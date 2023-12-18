@@ -230,13 +230,13 @@ for epoch in range(start_epoch+1, n_epochs+1):
         logits_u_w, logits_u_s = logits[batch_size:].chunk(2)
         del logits
 
-        Lx = F.cross_entropy(logits_x, targets_x, weights=class_weights, reduction='mean')
+        Lx = F.cross_entropy(logits_x, targets_x, reduction='mean')
 
         pseudo_label = torch.softmax(logits_u_w.detach()/1., dim=-1)
         max_probs, targets_u = torch.max(pseudo_label, dim=-1)
         mask = max_probs.ge(threshold).float()
 
-        Lu = (F.cross_entropy(logits_u_s, targets_u, weights=class_weights,
+        Lu = (F.cross_entropy(logits_u_s, targets_u, 
                               reduction='none') * mask).mean()
 
         loss = Lx + Lu

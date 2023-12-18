@@ -23,7 +23,5 @@ CUDA_VISIBLE_DEVICES=0 python -u src/trainer.py \
     --num_worker=4 \
     --input_channel=3 \
     --seed 32 \
-    --num_labeled 1280 \
-    --mu 4 \
-    --threshold 0.9 \
+
     2>&1 | tee $log_file

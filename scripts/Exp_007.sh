@@ -23,4 +23,7 @@ CUDA_VISIBLE_DEVICES=0 python -u src/fixmatchtrainer.py \
     --num_worker=4 \
     --input_channel=3 \
     --seed 32 \
+    --num_labeled 640 \
+    --mu 4 \
+    --threshold 0.9 \
     2>&1 | tee $log_file
