@@ -46,14 +46,20 @@ def get_fixMatch(configs_dict):
     train_labeled_idxs, train_unlabeled_idxs = x_u_split(
         configs_dict, trainset.targets)
 
-    train_labeled_dataset = Skin7SSL(
-        root, train_labeled_idxs, train='train',
-        transform=transform_labeled)
+    # train_labeled_dataset = Skin7SSL(
+    #     root, train_labeled_idxs, train='train',
+    #     transform=transform_labeled)
+    #
+    # train_unlabeled_dataset = Skin7SSL(
+    #     root, train_unlabeled_idxs, train='train',
+    #     transform=TransformFixMatch(mean=mean, std=std))
+    train_labeled_dataset = dataset.Skin7(root=root,
+                                          train='labeled',
+                                            transform=transform_labeled)
 
-    train_unlabeled_dataset = Skin7SSL(
-        root, train_unlabeled_idxs, train='train',
+    train_unlabeled_dataset = dataset.Skin7(
+        root, train='unlabeled',
         transform=TransformFixMatch(mean=mean, std=std))
-
 
     return train_labeled_dataset, train_unlabeled_dataset, valset, testset
 

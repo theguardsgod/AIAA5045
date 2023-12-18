@@ -207,7 +207,7 @@ sota["mcr"] = -1.0
 
 labeled_iter = iter(labeled_trainloader)
 unlabeled_iter = iter(unlabeled_trainloader)
-eval_step = 10000 // (batch_size * (mu+1))
+eval_step = 10000 // (batch_size * mu)
 weights = [0.036, 0.002, 0.084, 0.134, 0.037, 0.391, 0.316]
 class_weights = torch.FloatTensor(weights).cuda()
 for epoch in range(start_epoch+1, n_epochs+1):

@@ -56,6 +56,10 @@ class Skin7(Dataset):
             csv = './data/converted_label/val.csv'
         elif self.train == 'test':
             csv = './data/converted_label/test.csv'
+        elif self.train == 'labeled':
+            csv = './data/converted_label/labeled_20_split.csv'
+        elif self.train == 'unlabeled':
+            csv = './data/converted_label/unlabeled_80_split.csv'
 
         fn = csv
         csvfile = pd.read_csv(fn)
