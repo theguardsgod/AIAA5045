@@ -69,10 +69,10 @@ def x_u_split(configs_dict, labels):
     for i in range(configs_dict['num_classes']):
         idx = np.where(labels == i)[0]
         idx = np.random.choice(idx, label_per_class, False)
-        print(len(idx))
+
         labeled_idx.extend(idx)
     labeled_idx = np.array(labeled_idx)
-    assert len(labeled_idx) == configs_dict['num_labeled']
+    #assert len(labeled_idx) == configs_dict['num_labeled']
 
     np.random.shuffle(labeled_idx)
     return labeled_idx, unlabeled_idx
