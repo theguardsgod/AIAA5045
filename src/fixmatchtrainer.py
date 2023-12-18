@@ -133,7 +133,7 @@ trainset = dataset.Skin7(root="/home/ubuntu22/dataset/ISIC2018/ISIC2018_Task3_Tr
 trainloader = torch.utils.data.DataLoader(trainset, batch_size=batch_size,
                                           shuffle=True, pin_memory=True,
                                           num_workers=num_workers,
-                                          sampler=train_sampler)
+                                          sampler=None)
 labeled_trainloader = DataLoader(
         labeled_dataset,
         sampler=train_sampler(labeled_dataset),
