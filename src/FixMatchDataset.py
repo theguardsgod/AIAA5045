@@ -108,16 +108,21 @@ class Skin7SSL(dataset.Skin7):
             self.targets = np.array(self.targets)[indexs]
 
     def __getitem__(self, index):
-        img, target = self.data[index], self.targets[index]
-        img = Image.fromarray(img)
 
+        path = self.data[index]
+        target = self.targets[index]
+        img = pil_loader(path)
         if self.transform is not None:
             img = self.transform(img)
 
-        if self.target_transform is not None:
-            target = self.target_transform(target)
-
         return img, target
+
+def pil_loader(path):
+    """Image Loader
+    """
+    with open(path, "rb") as afile:
+        img = Image.open(afile)
+        return img.convert("RGB")
 
 
 
