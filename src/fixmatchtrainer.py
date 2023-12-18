@@ -218,8 +218,27 @@ for epoch in range(start_epoch+1, n_epochs+1):
     mask_probs = []
 
     for batch_idx in range(eval_step):
-        inputs_x, targets_x = next(labeled_iter)
-        (inputs_u_w, inputs_u_s), _ = next(unlabeled_iter)
+
+
+        try:
+            inputs_x, targets_x = next(labeled_iter)
+            # error occurs ↓
+            # inputs_x, targets_x = next(labeled_iter)
+        except:
+            labeled_iter = iter(labeled_trainloader)
+            inputs_x, targets_x = next(labeled_iter)
+            # error occurs ↓
+            # inputs_x, targets_x = next(labeled_iter)
+
+        try:
+            (inputs_u_w, inputs_u_s), _ = next(unlabeled_iter)
+            # error occurs ↓
+            # (inputs_u_w, inputs_u_s), _ = next(unlabeled_iter)
+        except:
+            unlabeled_iter = iter(unlabeled_trainloader)
+            (inputs_u_w, inputs_u_s), _ = next(unlabeled_iter)
+            # error occurs ↓
+            # (inputs_u_w, inputs_u_s), _ = next(unlabeled_iter)
         batch_size = inputs_x.shape[0]
         inputs = interleave(
             torch.cat((inputs_x, inputs_u_w, inputs_u_s)), 2*mu+1).to(device)
