@@ -128,8 +128,12 @@ else:
     net = nn.DataParallel(net, device_ids=device_ids).to(device)
 
 _print("=> iter_fold is {}".format(iter_fold))
-
-
+trainset = dataset.Skin7(root="/home/ubuntu22/dataset/ISIC2018/ISIC2018_Task3_Training_Input", train='train',
+                         transform=train_transform)
+trainloader = torch.utils.data.DataLoader(trainset, batch_size=batch_size,
+                                          shuffle=True, pin_memory=True,
+                                          num_workers=num_workers,
+                                          sampler=train_sampler)
 labeled_trainloader = DataLoader(
         labeled_dataset,
         sampler=train_sampler(labeled_dataset),
@@ -235,16 +239,8 @@ for epoch in range(start_epoch+1, n_epochs+1):
         Lu = (F.cross_entropy(logits_u_s, targets_u, weights=class_weights,
                               reduction='none') * mask).mean()
 
-        loss = Lx + args.lambda_u * Lu
+        loss = Lx + Lu
 
-    for batch_idx, (data, target) in enumerate(trainloader):
-        data, target = data.to(device), target.to(device)
-        predict = net(data)
-        opt.zero_grad()
-        loss = criterion(predict, target)
-        loss.backward()
-        opt.step()
-        losses.append(loss.item())
 
     # print to log
     dicts = {

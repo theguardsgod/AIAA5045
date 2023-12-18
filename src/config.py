@@ -116,7 +116,7 @@ class Config:
                                  help="number of labeled data.")
         self.parser.add_argument("--mu", default=7, type=int,
                                  help="coefficient of unlabeled batch size.")
-        self.parser.add_argument("--threshold", default=0.95, type=int,
+        self.parser.add_argument("--threshold", default=0.95, type=float,
                                  help="pseudo label threshold.")
 
     def _load_common_setting(self):
