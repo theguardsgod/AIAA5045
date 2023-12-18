@@ -8,7 +8,7 @@ experiment_index=${file_name##*_}
 experiment_index=${experiment_index%%.*}
 
 
-CUDA_VISIBLE_DEVICES=0 python -u src/trainer.py \
+CUDA_VISIBLE_DEVICES=0 python -u src/fixmatchtrainer.py \
     --experiment_index=$experiment_index \
     --cudas=0 \
     --n_epochs=800 \
