@@ -224,7 +224,7 @@ for epoch in range(start_epoch+1, n_epochs+1):
         inputs = interleave(
             torch.cat((inputs_x, inputs_u_w, inputs_u_s)), 2*mu+1).to(device)
         targets_x = targets_x.to(device)
-        logits = model(inputs)
+        logits = net(inputs)
         logits = de_interleave(logits, 2*mu+1)
         logits_x = logits[:batch_size]
         logits_u_w, logits_u_s = logits[batch_size:].chunk(2)

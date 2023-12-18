@@ -11,8 +11,8 @@ experiment_index=${experiment_index%%.*}
 CUDA_VISIBLE_DEVICES=0 python -u src/fixmatchtrainer.py \
     --experiment_index=$experiment_index \
     --cudas=0 \
-    --n_epochs=800 \
-    --batch_size=64 \
+    --n_epochs=200 \
+    --batch_size=8 \
     --server=lcy \
     --eval_frequency=5 \
     --backbone=dense121 \
@@ -24,6 +24,6 @@ CUDA_VISIBLE_DEVICES=0 python -u src/fixmatchtrainer.py \
     --input_channel=3 \
     --seed 32 \
     --num_labeled 640 \
-    --mu 4 \
+    --mu 2 \
     --threshold 0.9 \
     2>&1 | tee $log_file
