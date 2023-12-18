@@ -39,9 +39,9 @@ def get_fixMatch(configs_dict):
     trainset = dataset.Skin7(root="/home/ubuntu22/dataset/ISIC2018/ISIC2018_Task3_Training_Input", train='train',
                              transform=transform_labeled)
     valset = dataset.Skin7(root="/home/ubuntu22/dataset/ISIC2018/ISIC2018_Task3_Validation_Input", train='val',
-                           transform=val_transform)
+                           transform=transform_val)
     testset = dataset.Skin7(root="/home/ubuntu22/dataset/ISIC2018/ISIC2018_Task3_Test_Input", train='test',
-                            transform=val_transform)
+                            transform=transform_val)
     root = "/home/ubuntu22/dataset/ISIC2018/ISIC2018_Task3_Validation_Input"
     train_labeled_idxs, train_unlabeled_idxs = x_u_split(
         configs_dict, trainset.targets)
