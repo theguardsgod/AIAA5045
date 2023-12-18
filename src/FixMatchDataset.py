@@ -37,7 +37,7 @@ def get_fixMatch(configs_dict):
         transforms.Normalize(mean, std)
     ])
     trainset = dataset.Skin7(root="/home/ubuntu22/dataset/ISIC2018/ISIC2018_Task3_Training_Input", train='train',
-                             transform=train_transform)
+                             transform=transform_labeled)
     valset = dataset.Skin7(root="/home/ubuntu22/dataset/ISIC2018/ISIC2018_Task3_Validation_Input", train='val',
                            transform=val_transform)
     testset = dataset.Skin7(root="/home/ubuntu22/dataset/ISIC2018/ISIC2018_Task3_Test_Input", train='test',
