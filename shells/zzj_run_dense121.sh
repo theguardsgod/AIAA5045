@@ -9,9 +9,9 @@ file_name=`basename $0`
 experiment_index=${file_name##*_}
 experiment_index=${experiment_index%%.*}
 
-CUDA_VISIBLE_DEVICES=1 python -u src/trainer.py \
+CUDA_VISIBLE_DEVICES=3 python -u src/trainer.py \
     --experiment_index=$experiment_index \
-    --cudas=1 \
+    --cudas=3 \
     --n_epochs=800 \
     --batch_size=160 \
     --server=zzj \
