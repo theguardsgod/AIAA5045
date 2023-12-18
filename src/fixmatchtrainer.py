@@ -139,7 +139,7 @@ labeled_trainloader = DataLoader(
         sampler=train_sampler(labeled_dataset),
         batch_size=batch_size,
         num_workers=num_workers,
-        shuffle=True, pin_memory=True,
+         pin_memory=True,
         drop_last=True)
 
 unlabeled_trainloader = DataLoader(
@@ -147,7 +147,7 @@ unlabeled_trainloader = DataLoader(
         sampler=train_sampler(unlabeled_dataset),
         batch_size=batch_size*mu,
         num_workers=num_workers,
-        shuffle=True, pin_memory=True,
+        pin_memory=True,
         drop_last=True)
 
 valloader = torch.utils.data.DataLoader(valset, batch_size=batch_size,
