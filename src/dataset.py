@@ -51,7 +51,7 @@ class Skin7(Dataset):
     def get_data(self, data_dir):
 
         if self.train == 'train':
-            csv = './data/converted_label/train.csv'
+            csv = './data/converted_label/labeled_20_split.csv'
         elif self.train == 'val':
             csv = './data/converted_label/val.csv'
         elif self.train == 'test':

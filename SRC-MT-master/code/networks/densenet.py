@@ -8,7 +8,7 @@ import os
 
 __all__ = ['DenseNet', 'densenet121', 'densenet169', 'densenet201', 'densenet161']
 
-os.environ['TORCH_HOME'] = '/home/boya/Documents/SRC-MT/model/'
+os.environ['TORCH_HOME'] = '/home/zhuzhengjie/root/CODE/AIAA5045/SRC-MT-master/model/'
 
 model_urls = {
     'densenet121': 'https://download.pytorch.org/models/densenet121-a639ec97.pth',
@@ -114,9 +114,9 @@ class DenseNet(nn.Module):
     def forward(self, x):
         features = self.features(x)
         out = F.relu(features, inplace=True)
-        print(out.size())
+        # print(out.size())
         out = F.adaptive_avg_pool2d(out, (1, 1)).view(features.size(0), -1)
-        print(out.size())
+        # print(out.size())
         out = self.classifier(out)
         return out
 

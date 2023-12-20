@@ -34,7 +34,7 @@ class CheXpertDataset(Dataset):
         self.root_dir = root_dir
         self.images = file['image'].values
         self.labels = file.iloc[:, 1:-1].values.astype(int)
-        print(self.images,self.labels)
+        # print(self.images,self.labels)
         self.transform = transform
 
         print('Total # images:{}, labels:{}'.format(len(self.images),len(self.labels)))

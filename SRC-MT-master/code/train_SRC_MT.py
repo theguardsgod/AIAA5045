@@ -26,12 +26,12 @@ from dataloaders import  dataset
 from dataloaders.dataset import TwoStreamBatchSampler
 from utils.util import get_timestamp
 from validation import epochVal, epochVal_metrics
-
+from rich import print
 parser = argparse.ArgumentParser()
 parser.add_argument('--root_path', type=str, default='/home/boya/DATA/2018/ISIC2018_Task3_Training_Input', help='dataset root dir')
-parser.add_argument('--csv_file_train', type=str, default='/home/boya/Documents/SRC-MT/SRC-MT-master/data/skin/training.csv', help='training set csv file')
-parser.add_argument('--csv_file_val', type=str, default='/home/boya/Documents/SRC-MT/SRC-MT-master/data/skin/validation.csv', help='validation set csv file')
-parser.add_argument('--csv_file_test', type=str, default='/home/boya/Documents/SRC-MT/SRC-MT-master/data/skin/testing.csv', help='testing set csv file')
+parser.add_argument('--csv_file_train', type=str, default='./data/skin/training.csv', help='training set csv file')
+parser.add_argument('--csv_file_val', type=str, default='./data/skin/validation.csv', help='validation set csv file')
+parser.add_argument('--csv_file_test', type=str, default='./data/skin/testing.csv', help='testing set csv file')
 parser.add_argument('--exp', type=str,  default='xxxx', help='model_name')
 parser.add_argument('--epochs', type=int,  default=100, help='maximum epoch number to train')
 parser.add_argument('--batch_size', type=int, default=16, help='batch_size per gpu')
@@ -42,7 +42,7 @@ parser.add_argument('--labeled_num', type=int, default=1400, help='number of lab
 parser.add_argument('--base_lr', type=float,  default=1e-4, help='maximum epoch number to train')
 parser.add_argument('--deterministic', type=int,  default=1, help='whether use deterministic training')
 parser.add_argument('--seed', type=int,  default=1337, help='random seed')
-parser.add_argument('--gpu', type=str,  default='0,1,2', help='GPU to use')
+parser.add_argument('--gpu', type=str,  default='2', help='GPU to use')
 ### tune
 parser.add_argument('--resume', type=str,  default=None, help='model to resume')
 # parser.add_argument('--resume', type=str,  default=None, help='GPU to use')
@@ -58,7 +58,7 @@ parser.add_argument('--consistency_rampup', type=float,  default=30, help='consi
 args = parser.parse_args()
 
 train_data_path = args.root_path
-snapshot_path = "../model/" + args.exp + "/"
+snapshot_path = "/home/zhuzhengjie/root/RESULT/AIAA5045/SRC/" + args.exp + "/"
 
 os.environ['CUDA_VISIBLE_DEVICES'] = args.gpu
 batch_size = args.batch_size * len(args.gpu.split(','))
