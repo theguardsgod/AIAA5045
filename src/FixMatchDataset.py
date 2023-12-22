@@ -43,8 +43,8 @@ def get_fixMatch(configs_dict):
     testset = dataset.Skin7(root="/home/ubuntu22/dataset/ISIC2018/ISIC2018_Task3_Test_Input", train='test',
                             transform=transform_val)
     root = "/home/ubuntu22/dataset/ISIC2018/ISIC2018_Task3_Training_Input"
-    train_labeled_idxs, train_unlabeled_idxs = x_u_split(
-        configs_dict, trainset.targets)
+    # train_labeled_idxs, train_unlabeled_idxs = x_u_split(
+    #     configs_dict, trainset.targets)
 
     # train_labeled_dataset = Skin7SSL(
     #     root, train_labeled_idxs, train='train',

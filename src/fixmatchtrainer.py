@@ -258,7 +258,7 @@ for epoch in range(start_epoch+1, n_epochs+1):
         Lu = (F.cross_entropy(logits_u_s, targets_u,
                               reduction='none') * mask).mean()
 
-        loss = Lx + Lu
+        loss = Lx + 0.5 * Lu
         loss.backward()
         opt.step()
 
